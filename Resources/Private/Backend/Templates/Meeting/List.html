@@ -1,0 +1,24 @@
+<f:layout name="Default" />
+
+<f:section name="content">
+	<div class="clearfix">
+		<div class="pull-right">
+			<f:render partial="Meeting/List/New" arguments="{leaders : leaders}" />
+		</div>
+		<h1>Alle Anwesenheitslisten</h1>
+	</div>
+
+	<p>
+		Hier werden alle registrierten Treffen aufgelistet. Du kannst ein neues hinzufügen oder nach Treffen suchen.
+	</p>
+
+	<f:if condition="{meetings -> f:count()} > 0">
+		<f:then>
+			<f:render partial="Meeting/List/Table" arguments="{meetings : meetings, mitglieder : mitglieder, leaders : leaders}" />
+		</f:then>
+		<f:else>
+			<p class="text-warning">Es sind noch keine Anwesenheitslisten verfügbar.</p>
+		</f:else>
+	</f:if>
+
+</f:section>

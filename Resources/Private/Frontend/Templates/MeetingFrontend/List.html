@@ -1,0 +1,60 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Default" />
+
+<f:section name="main">
+    <p>
+        <f:if condition="{leaders -> f:count()}">
+            <f:link.action action="manage" class="btn btn-primary btn-sm">
+                <i class="fal fa-fw fa-edit"></i> Anwesenheitslisten verwalten
+            </f:link.action>
+        </f:if>
+    </p>
+    <h1>Deine Anwesenheiten</h1>
+    <p>
+        Hier findest du Informationen über alle von uns registrierten Teilnahmen an Aktionen innerhalb der letzten vier Wochen. Die Daten werden nach Ende der gesetzlich vorgeschriebenen Speicherfrist automatisch gelöscht.
+    </p>
+
+    <hr>
+
+    <div class="card">
+        <div class="card-body">
+            <f:if condition="{mitglieder -> f:count()} > 0">
+                <div class="card-text">
+                    <f:form action="list">
+                        <label for="participant">Bitte wähle aus, wessen Anwesenheiten du anzeigen möchtest:</label>
+                        <div class="d-flex">
+                            <f:form.select name="participant" options="{mitglieder}" value="{participant}" optionLabelField="name" optionValueField="uid" class="form-control flex-grow-1 mr-1" sortByOptionLabel="1" />
+                            <f:form.button type="submit" class="btn btn-success" title="Anwesenheiten des Mitglieds anzeigen">
+                                <i class="fal fa-fw fa-search"></i>
+                            </f:form.button>
+                        </div>
+                    </f:form>
+                </div>
+            </f:if>
+        </div>
+
+
+        <f:alias map="{itemsPerPage : 10}">
+            <f:if condition="{meetings -> f:count()} > 0">
+                <f:then>
+                    <f:if condition="{meetings -> f:count()} > {itemsPerPage}">
+                        <f:then>
+                            <f:widget.paginate objects="{meetings}" as="paginatedMeetings" configuration="{itemsPerPage: itemsPerPage, insertAbove: 1, insertBelow: 1, maximumNumberOfLinks: 10}">
+                                <f:render partial="Meeting/List/Meetings" arguments="{meetings : paginatedMeetings}" />
+                            </f:widget.paginate>
+                        </f:then>
+                        <f:else>
+                            <f:render partial="Meeting/List/Meetings" arguments="{meetings : meetings}" />
+                        </f:else>
+                    </f:if>
+
+                </f:then>
+                <f:else>
+                    <div class="card-body">
+                        <p class="card-text text-warning">Du hast noch an keiner Aktion teilgenommen.</p>
+                    </div>
+                </f:else>
+            </f:if>
+        </f:alias>
+    </div>
+</f:section>

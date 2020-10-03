@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="de" datatype="plaintext" original="messages" date="2018-03-17T14:50:03Z" product-name="bw_dpsg_corona">
+		<header/>
+		<body>
+		    <!-- Meeting -->
+			<trans-unit id="tx_bwdpsgcorona_domain_model_meeting">
+				<source>Anwesenheitsliste</source>
+			</trans-unit>
+			<trans-unit id="tx_bwdpsgcorona_domain_model_meeting.palettes.datetime">
+				<source>Zeitangaben</source>
+			</trans-unit>
+			<trans-unit id="tx_bwdpsgcorona_domain_model_meeting.name">
+				<source>Name der Aktion</source>
+			</trans-unit>
+			<trans-unit id="tx_bwdpsgcorona_domain_model_meeting.begin_datetime">
+				<source>Beginn der Aktion</source>
+			</trans-unit>
+			<trans-unit id="tx_bwdpsgcorona_domain_model_meeting.end_datetime">
+				<source>Ende der Aktion</source>
+			</trans-unit>
+			<trans-unit id="tx_bwdpsgcorona_domain_model_meeting.leader">
+				<source>Verantwortliche*r Leiter*in</source>
+			</trans-unit>
+			<trans-unit id="tx_bwdpsgcorona_domain_model_meeting.participants">
+				<source>Teilnehmer*innen</source>
+			</trans-unit>
+			<trans-unit id="tx_bwdpsgcorona_domain_model_meeting.more_participants">
+				<source>Weitere Teilnehmer*innen</source>
+			</trans-unit>
+        </body>
+	</file>
+</xliff>

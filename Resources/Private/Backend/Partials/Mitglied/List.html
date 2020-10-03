@@ -1,0 +1,51 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-default" data-toggle="modal" data-target="#show-{meeting.uid}" title="Mitglied der Anwesenheitsliste anzeigen">
+    <i class="fa fa-fw fa-eye"></i>
+</button>
+
+<!-- Modal -->
+<div class="modal fade text-left" id="show-{meeting.uid}" tabindex="-1" role="dialog" aria-labelledby="show-{meeting.uid}-label">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="add-{meeting.uid}-label">Mitglied der Anwesenheitsliste anzeigen</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Name:</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <f:for each="{meeting.participantsArray}" as="participant" iteration="iter">
+                            <tr>
+                                <td>{participant.name}</td>
+                                <td class="text-right">
+                                    <f:form action="update" object="{meeting}" objectName="meeting">
+                                        <f:for each="{meeting.participantsArray}" as="otherParticipants" iteration="iter">
+                                            <f:if condition="{otherParticipants.uid} != {participant.uid}">
+                                                <f:form.hidden property="participants.{iter.index}" value="{otherParticipants.uid}" />
+                                            </f:if>
+                                        </f:for>
+                                        <f:form.button type="submit" class="btn btn-danger">
+                                            <i class="fa fa-fw fa-trash"></i>
+                                        </f:form.button>
+                                    </f:form>
+
+
+                                </td>
+                            </tr>
+                        </f:for>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
+            </div>
+        </div>
+    </div>
+</div>

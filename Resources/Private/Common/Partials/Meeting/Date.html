@@ -1,0 +1,20 @@
+<div style="line-height: 1em;">
+    <f:alias map="{
+        beginDate : '{f:format.date(format : \'Y-m-d\', date : begin)}',
+        beginHour : '{f:format.date(format : \'H:i\', date : begin)}',
+        endDate : '{f:format.date(format : \'Y-m-d\', date : end)}',
+        endHour : '{f:format.date(format : \'H:i\', date : end)}'
+    }">
+        <f:if condition="{beginDate} == {endDate}">
+            <f:then>
+                <f:format.date format="d.m.Y">{begin}</f:format.date>
+                <div class="small">
+                    <f:format.date format="H:i">{begin}</f:format.date> Uhr bis <f:format.date format="H:i">{end}</f:format.date> Uhr</div>
+            </f:then>
+            <f:else>
+                <f:format.date format="d.m.Y - H:i">{begin}</f:format.date> Uhr
+                <div class="small">bis <f:format.date format="d.m.Y - H:i">{end}</f:format.date> Uhr</div>
+            </f:else>
+        </f:if>
+    </f:alias>
+</div>

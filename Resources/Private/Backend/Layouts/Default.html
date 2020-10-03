@@ -1,0 +1,15 @@
+<f:be.container
+		loadJQuery="true"
+		jQueryNamespace="jQuery"
+		includeRequireJsModules="{0 : 'TYPO3/CMS/BwDpsgCorona/MouseWheel', 1 : 'TYPO3/CMS/BwDpsgCorona/DatetimePicker'}">
+
+	<f:comment>
+	<f:render partial="Navigation" />
+	<f:render partial="Breadcrumb" />
+	</f:comment>
+
+	<div style="margin: 10px 30px;">
+		<f:flashMessages />
+		<f:render section="content" />
+	</div>
+</f:be.container>

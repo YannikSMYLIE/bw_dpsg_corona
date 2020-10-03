@@ -1,0 +1,35 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th><f:translate key="tx_bwdpsgcorona_domain_model_meeting.name" /></th>
+            <th><f:translate key="tx_bwdpsgcorona_domain_model_meeting.begin_datetime" /></th>
+            <th><f:translate key="tx_bwdpsgcorona_domain_model_meeting.end_datetime" /></th>
+            <th><f:translate key="tx_bwdpsgcorona_domain_model_meeting.leader" /></th>
+            <th colspan="2">Anzahl <f:translate key="tx_bwdpsgcorona_domain_model_meeting.participants" /></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <f:for each="{meetings}" as="meeting">
+            <tr>
+                <td>{meeting.name}</td>
+                <td>
+                    <f:format.date format="d.m.Y - H:i">{meeting.beginDatetime}</f:format.date>
+                </td>
+                <td>
+                    <f:format.date format="d.m.Y - H:i">{meeting.endDatetime}</f:format.date>
+                </td>
+                <td>{meeting.leader.name}</td>
+                <td>{meeting.participants -> f:count()}</td>
+                <td>
+                    <f:render partial="Mitglied/List" arguments="{meeting : meeting}" />
+                    <f:render partial="Mitglied/Add" arguments="{meeting : meeting, mitglieder : mitglieder}" />
+                </td>
+                <td class="text-right">
+                    <f:render partial="Meeting/List/Edit" arguments="{meeting : meeting, leaders : leaders}" />
+                    <f:render partial="Meeting/List/Delete" arguments="{meeting : meeting}" />
+                </td>
+            </tr>
+        </f:for>
+    </tbody>
+</table>

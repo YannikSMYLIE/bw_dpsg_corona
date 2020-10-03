@@ -1,0 +1,46 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th><f:translate key="tx_bwdpsgcorona_domain_model_meeting.name" /></th>
+            <th class="d-none d-lg-table-cell"><f:translate key="tx_bwdpsgcorona_domain_model_meeting.palettes.datetime" /></th>
+            <th class="d-none d-lg-table-cell"><f:translate key="tx_bwdpsgcorona_domain_model_meeting.leader" /></th>
+            <th class="d-none d-lg-table-cell">#</th>
+            <th class="text-right">
+                <f:render partial="Meeting/Manage/New" arguments="{leaders : leaders}" />
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <f:for each="{meetings}" as="meeting">
+            <tr>
+                <td>
+                    <div class="mb-1">
+                        {meeting.name}
+                    </div>
+                    <div class="d-lg-none">
+                        <div class="mb-1">
+                            <f:render partial="Meeting/Date" arguments="{begin : meeting.beginDatetime, end : meeting.endDatetime}" />
+                        </div>
+                        <div class="mb-1">
+                            {meeting.leader.name}
+                        </div>
+                        <div>
+                            {meeting.participants -> f:count()} Teilnehmer*innen
+                        </div>
+                    </div>
+                </td>
+                <td class="d-none d-lg-table-cell">
+                    <f:render partial="Meeting/Date" arguments="{begin : meeting.beginDatetime, end : meeting.endDatetime}" />
+                </td>
+                <td class="d-none d-lg-table-cell">{meeting.leader.name}</td>
+                <td class="d-none d-lg-table-cell">{meeting.participants -> f:count()}</td>
+                <td class="text-right text-nowrap">
+                    <f:render partial="Meeting/Manage/Edit" arguments="{meeting : meeting, leaders : leaders}" />
+                    <f:link.action action="show" arguments="{meeting : meeting}" class="btn btn-sm btn-primary" title="Anwesenheitsliste anzeigen und bearbeiten">
+                        <i class="fal fa-fw fa-eye"></i>
+                    </f:link.action>
+                </td>
+            </tr>
+        </f:for>
+    </tbody>
+</table>

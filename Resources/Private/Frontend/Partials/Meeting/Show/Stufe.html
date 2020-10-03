@@ -1,0 +1,8 @@
+<f:form action="update" object="{meeting}" objectName="meeting">
+    <f:for each="{mitglieder}" as="mitglied" iteration="iter">
+        <f:form.hidden property="participants.{iter.index}" value="{mitglied.uid}" />
+    </f:for>
+    <f:form.button type="submit" class="btn btn-success btn-sm" title="Teilnehmer*in zur Anwesenheitsliste hinzufügen">
+        <i class="fal fa-fw fa-plus"></i> Alle {label}
+    </f:form.button>
+</f:form>

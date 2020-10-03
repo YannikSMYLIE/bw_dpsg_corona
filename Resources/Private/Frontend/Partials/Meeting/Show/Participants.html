@@ -1,0 +1,36 @@
+<table class="table table-striped participants">
+    <thead>
+    <tr>
+        <th>Name:</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <f:for each="{meeting.participantsArray}" as="participant">
+        <tr>
+            <td>
+                {participant.name}
+            </td>
+            <td class="text-right">
+                <f:link.action action="removeParticipant" class="btn btn-sm btn-danger remove" title="Mitglied von Anwesenheitsliste entfernen" arguments="{meeting : meeting, participant : participant}" data="{ajax-url: '{f:uri.action(controller : \'Ajax\', action : \'removeParticipant\', arguments : {meeting : meeting, participant : participant})}'}">
+                    <i class="fal fa-fw fa-trash"></i>
+                </f:link.action>
+            </td>
+        </tr>
+    </f:for>
+    <tr>
+        <td colspan="2">
+            <f:form action="update" object="{meeting}" objectName="meeting">
+                <div class="form-group">
+                    <label for="moreParticipants">Weitere Teilnehmer*innen:</label>
+                    <f:form.textarea style="min-height: 200px;" property="moreParticipants" class="form-control" />
+                </div>
+                <div class="text-right">
+                    <f:form.button type="submit" class="btn btn-success">Weitere Teilnehmer*innen speichern</f:form.button>
+                </div>
+
+            </f:form>
+        </td>
+    </tr>
+    </tbody>
+</table>

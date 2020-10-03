@@ -1,0 +1,37 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Default" />
+
+<f:section name="main">
+    <p>
+        <f:link.action action="list" class="btn btn-primary btn-sm">
+            <i class="fal fa-fw fa-eye"></i> Anwesenheitslisten ansehen
+        </f:link.action>
+    </p>
+    <h1>Anwesenheitslisten verwalten</h1>
+    <p>
+        Hier kannst du von dir erstellte Anwesenheitslisten verwalten sowie neue anlegen.
+    </p>
+
+    <f:flashMessages />
+
+    <f:alias map="{itemsPerPage : 10}">
+        <f:if condition="{meetings -> f:count()} > 0">
+            <f:then>
+                <f:if condition="{meetings -> f:count()} > {itemsPerPage}">
+                    <f:then>
+                        <f:widget.paginate objects="{meetings}" as="paginatedMeetings" configuration="{itemsPerPage: itemsPerPage, insertAbove: 1, insertBelow: 1, maximumNumberOfLinks: 10}">
+                            <f:render partial="Meeting/Manage/Meetings" arguments="{meetings : paginatedMeetings}" />
+                        </f:widget.paginate>
+                    </f:then>
+                    <f:else>
+                        <f:render partial="Meeting/Manage/Meetings" arguments="{meetings : meetings, leaders : leaders}" />
+                    </f:else>
+                </f:if>
+
+            </f:then>
+            <f:else>
+                <p class="text-warning">Du hast noch keine Anwesenheitsliste erstellt.</p>
+            </f:else>
+        </f:if>
+    </f:alias>
+</f:section>

@@ -1,0 +1,30 @@
+<table class="table table-striped mb-0">
+    <thead>
+        <tr>
+            <th><f:translate key="tx_bwdpsgcorona_domain_model_meeting.name" /></th>
+            <th class="d-none d-lg-table-cell"><f:translate key="tx_bwdpsgcorona_domain_model_meeting.palettes.datetime" /></th>
+            <th class="d-none d-lg-table-cell"><f:translate key="tx_bwdpsgcorona_domain_model_meeting.leader" /></th>
+        </tr>
+    </thead>
+    <tbody>
+        <f:for each="{meetings}" as="meeting">
+            <tr>
+                <td>
+                    <div class="mb-1">{meeting.name}</div>
+                    <div class="d-lg-none">
+                        <div class="mb-1">
+                            <f:render partial="Meeting/Date" arguments="{begin : meeting.beginDatetime, end : meeting.endDatetime}" />
+                        </div>
+                        <div>
+                            {meeting.leader.name}
+                        </div>
+                    </div>
+                </td>
+                <td class="d-none d-lg-table-cell">
+                    <f:render partial="Meeting/Date" arguments="{begin : meeting.beginDatetime, end : meeting.endDatetime}" />
+                </td>
+                <td class="d-none d-lg-table-cell">{meeting.leader.name}</td>
+            </tr>
+        </f:for>
+    </tbody>
+</table>

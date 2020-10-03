@@ -1,0 +1,74 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Default" />
+
+<f:section name="main">
+    <p>
+        <f:link.action action="manage" class="btn btn-primary btn-sm">
+            <i class="fal fa-fw fa-edit"></i> Anwesenheitslisten verwalten
+        </f:link.action>
+    </p>
+    <h1>Anwesenheitslisten anzeigen</h1>
+    <p>
+        <strong>{meeting.name}:</strong> <f:format.date format="d.m.Y - H:i">{meeting.beginDatetime}</f:format.date> Uhr bis <f:format.date format="d.m.Y - H:i">{meeting.endDatetime}</f:format.date> Uhr
+    </p>
+
+    <f:flashMessages />
+
+    <h3>Teilnehmer*innen:</h3>
+
+    <div class="alert alert-success">
+        <strong>Teilnehmer*in zur Anwesenheitsliste hinzufügen:</strong>
+
+        <f:form action="addParticipant" arguments="{meeting : meeting}">
+            <div class="d-flex">
+                <f:form.select name="participant" options="{mitglieder.alle}" optionValueField="uid" optionLabelField="name" class="form-control flex-grow-1 mr-1" />
+                <f:form.button type="submit" class="btn btn-success" title="Teilnehmer*in zur Anwesenheitsliste hinzufügen">
+                    <i class="fal fa-fw fa-plus"></i>
+                </f:form.button>
+            </div>
+        </f:form>
+
+        <f:if condition="{meeting.participants -> f:count()} == 0">
+            <div class="mt-2">
+                <div class="small"><strong>Oder mit Stufe beginnen:</strong></div>
+                <div class="d-inline-block mr-1">
+                    <f:render partial="Meeting/Show/Stufe" arguments="{meeting : meeting, mitglieder : mitglieder.woelflinge, label : 'Wölflinge'}" />
+                </div>
+                <div class="d-inline-block mr-1">
+                    <f:render partial="Meeting/Show/Stufe" arguments="{meeting : meeting, mitglieder : mitglieder.jungpfadfinder, label : 'Jungpfadfinder'}" />
+                </div>
+                <div class="d-inline-block mr-1">
+                    <f:render partial="Meeting/Show/Stufe" arguments="{meeting : meeting, mitglieder : mitglieder.pfadfinder, label : 'Pfadfinder'}" />
+                </div>
+                <div class="d-inline-block mr-1">
+                    <f:render partial="Meeting/Show/Stufe" arguments="{meeting : meeting, mitglieder : mitglieder.rover, label : 'Rover'}" />
+                </div>
+            </div>
+        </f:if>
+    </div>
+
+    <f:if condition="{meeting.participants -> f:count()} > 0">
+        <f:then>
+            <f:render partial="Meeting/Show/Participants" arguments="{meeting : meeting}" />
+        </f:then>
+        <f:else>
+            <p class="text-warning">Noch keine Mitglieder hinzugefügt.</p>
+        </f:else>
+    </f:if>
+
+
+
+    <script>
+        $('table.participants .remove').click(function() {
+            const tr = $(this).closest('tr');
+            const ajaxUrl = $(this).attr("data-ajax-url");
+
+            tr.css("opacity", 0.5);
+            $(this).prop("disabled", true);
+            $.get(ajaxUrl, function(data) {
+                tr.remove();
+            });
+            return false;
+        });
+    </script>
+</f:section>
